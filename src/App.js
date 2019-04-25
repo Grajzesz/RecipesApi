@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './index.css';
 import Form from './Form';
 import Result from './Result';
 
@@ -7,10 +7,9 @@ const ApiKey = '67d51b152c762ab5dd5a32213b7fd4dd';
 class App extends Component {
     state = {
         err: '',
-        desc: '',
         value: '',
-        image0: '',
-
+        images:'',
+        labels:''
     };
 
     handleTextChange = e => {
@@ -21,15 +20,14 @@ class App extends Component {
     handleCitySubmit = e => {
         e.preventDefault();
         console.log('lala');
-
         var counter = -1;
         function add() {
             return (counter += 1);
+        } var counter2 = -1;
+        function add2() {
+            return (counter2 += 1);
         }
 
-        // function image(){
-        //   return this.setState("image"+add()+":")
-        // }
         let n = 20;
         const Api = `https://api.edamam.com/search?q=${
             this.state.value
@@ -44,19 +42,67 @@ class App extends Component {
             })
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 this.setState(prevState => ({
                     err: false,
+                    images:[{
+                        image0: data.hits[add()].recipe.image,
+                        image1: data.hits[add()].recipe.image,
+                        image2: data.hits[add()].recipe.image,
+                        image3: data.hits[add()].recipe.image,
+                        image4: data.hits[add()].recipe.image,
+                        image5: data.hits[add()].recipe.image,
+                        image6: data.hits[add()].recipe.image,
+                        image7: data.hits[add()].recipe.image,
+                        image8: data.hits[add()].recipe.image,
+                        image9: data.hits[add()].recipe.image,
+                        image10: data.hits[add()].recipe.image,
+                        image11: data.hits[add()].recipe.image,
+                        image12: data.hits[add()].recipe.image,
+                        image13: data.hits[add()].recipe.image,
+                        image14: data.hits[add()].recipe.image,
+                        image15: data.hits[add()].recipe.image,
+                        image16: data.hits[add()].recipe.image,
+                        image17: data.hits[add()].recipe.image,
+                        image18: data.hits[add()].recipe.image,
+                        image19: data.hits[add()].recipe.image,
+                    }],
+                    labels:[{
+                        label0: data.hits[add2()].recipe.label,
+                        label1: data.hits[add2()].recipe.label,
+                        label2: data.hits[add2()].recipe.label,
+                        label3: data.hits[add2()].recipe.label,
+                        label4: data.hits[add2()].recipe.label,
+                        label5: data.hits[add2()].recipe.label,
+                        label6: data.hits[add2()].recipe.label,
+                        label7: data.hits[add2()].recipe.label,
+                        label8: data.hits[add2()].recipe.label,
+                        label9: data.hits[add2()].recipe.label,
+                        label10: data.hits[add2()].recipe.label,
+                        label11: data.hits[add2()].recipe.label,
+                        label12: data.hits[add2()].recipe.label,
+                        label13: data.hits[add2()].recipe.label,
+                        label14: data.hits[add2()].recipe.label,
+                        label15: data.hits[add2()].recipe.label,
+                        label16: data.hits[add2()].recipe.label,
+                        label17: data.hits[add2()].recipe.label,
+                        label18: data.hits[add2()].recipe.label,
+                        label19: data.hits[add2()].recipe.label,
 
-                    image0: data.hits[add()].recipe.image,
 
-                    image1: data.hits[add()].recipe.image,
-                    image2: data.hits[add()].recipe.image,
-                    image3: data.hits[add()].recipe.image,
+                    }]
 
-//   image: (prevState.image + 1)+( data.hits[add()].recipe.image)
 
+                    // image: prevState.image + 1 + data.hits[add()].recipe.image
                 }));
+                console.log(this.state.images);
+                console.log(this.state.labels);
+
+                // let images = [];
+
+                // for (let i = 0; i <= data.hits.length; i++) {
+                //     images.push(data.hits[i].recipe.image);
+                //     console.log(images);
+                // }
             });
     };
 
