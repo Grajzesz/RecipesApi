@@ -1,42 +1,21 @@
 import React from 'react';
 
-
 const Result = props => {
-    const {
-        err,
-        image0,
-        image1,
-        image2,
-        image3,
+    const { err, image0, image1, image2, image3 } = props.recipe;
 
-    } = props.recipe;
-
-
-
-
-
-console.log(image0);
-
-
-
-
+    console.log(image0);
 
     let content = null;
-    if (!err) {
-
+    if (err === false) {
         content = (
             <div className="content">
-            <img src={image0} alt="djis" />
-            <img src={image1} alt="djis" />
-            <img src={image2} alt="djis" />
-            <img src={image3} alt="djis" />
+                <img src={image0} alt="djis" />
+                <img src={image1} alt="djis" />
+                <img src={image2} alt="djis" />
+                <img src={image3} alt="djis" />
             </div>
         );
     }
-    return (
-        <div className="result">
-            {content}
-        </div>
-    );
+    return <div className="result">{content}</div>;
 };
 export default Result;

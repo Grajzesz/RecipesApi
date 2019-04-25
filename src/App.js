@@ -6,11 +6,11 @@ import Result from './Result';
 const ApiKey = '67d51b152c762ab5dd5a32213b7fd4dd';
 class App extends Component {
     state = {
+        err: '',
         desc: '',
         value: '',
         image0: '',
-        // image: '',
-        // image2: ''
+
     };
 
     handleTextChange = e => {
@@ -22,16 +22,14 @@ class App extends Component {
         e.preventDefault();
         console.log('lala');
 
+        var counter = -1;
+        function add() {
+            return (counter += 1);
+        }
 
-
-var counter = -1;
-function add() {
-  return counter += 1;
-}
-
-function image(){
-  return this.setState("image"+add()+":")
-}
+        // function image(){
+        //   return this.setState("image"+add()+":")
+        // }
         let n = 20;
         const Api = `https://api.edamam.com/search?q=${
             this.state.value
@@ -51,11 +49,13 @@ function image(){
                     err: false,
 
                     image0: data.hits[add()].recipe.image,
-                    // image: this.state.image+add(),
+
                     image1: data.hits[add()].recipe.image,
                     image2: data.hits[add()].recipe.image,
                     image3: data.hits[add()].recipe.image,
-                    city: prevState.value
+
+//   image: (prevState.image + 1)+( data.hits[add()].recipe.image)
+
                 }));
             });
     };
