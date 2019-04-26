@@ -6,7 +6,6 @@ import Result from './Result';
 const ApiKey = '67d51b152c762ab5dd5a32213b7fd4dd';
 class App extends Component {
     state = {
-        err: '',
         more: '',
         value: '',
         images: '',
@@ -52,7 +51,6 @@ class App extends Component {
                     return data;
                 }
                 this.setState(prevState => ({
-                    err: false,
                     more: data.more,
                     images: [
                         {
@@ -146,25 +144,17 @@ class App extends Component {
                                 data.hits[add()].recipe.ingredientLines
                         }
                     ]
-                    // image: prevState.image + 1 + data.hits[add()].recipe.image
                 }));
                 console.log(this.state.images);
                 console.log(this.state.labels);
-
-                // let images = [];
-
-                // for (let i = 0; i <= data.hits.length; i++) {
-                //     images.push(data.hits[i].recipe.image);
-                //     console.log(images);
-                // }
-            })
-            .catch(
-                err => console.log(err),
-                this.setState(prevState => ({
-                    err: true,
-                    value: prevState.value
-                }))
-            );
+            });
+        // .catch(
+        //     err => console.log(err),
+        //     this.setState(prevState => ({
+        //         err: true,
+        //         value: prevState.value
+        //     }))
+        // );
     };
 
     render() {

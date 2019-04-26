@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Result = props => {
-    const { err, more, images, labels, ingredients, value } = props.recipe;
+    const { more, images, labels, ingredients, value } = props.recipe;
 
     console.log(props.recipe.more);
     let content = null;
@@ -27,6 +27,9 @@ const Result = props => {
                     <img src={images[0].image3} alt="djis" />
                     <h3>{labels[0].label3}</h3>
                     <p>{ingredients[0].ingredients3.join(', \r\n')}</p>
+                    <a href="https://www.google.pl/">
+                        <div className="link">Let's see</div>
+                    </a>
                 </div>
                 <div className="food__container">
                     <img src={images[0].image4} alt="djis" />
