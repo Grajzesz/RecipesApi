@@ -1,11 +1,11 @@
 import React from 'react';
 
 const Result = props => {
-    const { err, images, labels, ingredients } = props.recipe;
+    const { err, more, images, labels, ingredients, value } = props.recipe;
 
-    // console.log(props.recipe.ingredients[0]);
+    console.log(props.recipe.more);
     let content = null;
-    if (err === false) {
+    if (more===true) {
         content = (
             <div className="content">
                 <div className="food__container">
@@ -112,6 +112,8 @@ const Result = props => {
             </div>
         );
     }
-    return <div className="result">{content}</div>;
+    return <div className="result">
+     {!more ? `Nie mamy w bazie ${value}` : content}
+    </div>;
 };
 export default Result;

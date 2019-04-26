@@ -86,8 +86,9 @@ button {
 input {
     outline: none;
     width: 40%;
-    border: 1px solid orange;
+    border: 1px solid #ec8939;
     text-align: center;
+    color: #ffa202;
 }
 
 input[type=text]:focus,

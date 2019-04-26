@@ -7,6 +7,7 @@ const ApiKey = '67d51b152c762ab5dd5a32213b7fd4dd';
 class App extends Component {
     state = {
         err: '',
+        more:'',
         value: '',
         images: '',
         labels: ''
@@ -27,10 +28,7 @@ class App extends Component {
             }
             return (counter += 1);
         }
-        var counter2 = -1;
-        function add2() {
-            return (counter2 += 1);
-        }
+
 
         let n = 20;
         const Api = `https://api.edamam.com/search?q=${
@@ -44,10 +42,19 @@ class App extends Component {
                 }
                 throw Error('lipa');
             })
+            .catch(
+                err => console.log(err),
+                this.setState(prevState => ({
+                    more: false,
+                    value: prevState.value
+                }))
+            )
             .then(response => response.json())
             .then(data => {
+                console.log(data.more);
                 this.setState(prevState => ({
                     err: false,
+                    more:true,
                     images: [
                         {
                             image0: data.hits[add()].recipe.image,
@@ -130,6 +137,7 @@ ingredients:[{
                 //     console.log(images);
                 // }
             });
+
     };
 
     render() {
