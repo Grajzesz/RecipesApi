@@ -10,7 +10,7 @@ const Form = props => {
                     type="text"
                     value={props.value}
                     onChange={props.change}
-                    placeholder={'Ingredient'}
+                    placeholder={'Ingredients You got'}
                 />
 
                 <button>Search Ingredients</button>

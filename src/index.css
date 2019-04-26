@@ -18,8 +18,8 @@
     height: fit-content;
     margin-bottom: 1%;
     white-space: pre-wrap;
-    border: 1px dashed #00000038;
-    padding: 2%;
+    border: 1px dashed #ffc054;
+    padding: 3%;
     border-radius: 5px;
     /* background-color: #eee; */
     display: inline-table;
@@ -36,7 +36,7 @@
 }
 
 .content {
-   /* display: flex; */
+    /* display: flex; */
     flex-wrap: wrap;
     margin: 0 auto;
     width: 90%;
@@ -66,17 +66,35 @@ p {
     font-size: 10px;
     padding: 4%
 }
-button, input{
+
+button,
+input {
     padding: 4px;
     width: 15%;
-    height:100%;
+    height: 100%;
 }
-button{
-    border:1px solid #ffc054;
+
+button {
+    border: 1px solid #ff070742;
     background-color: #ffc054;
     color: #fff;
+    outline: none;
+    box-shadow: 0 0 2px rgb(236, 137, 57);
 
 }
-input{
+
+input {
+    outline: none;
     width: 40%;
+    border: 1px solid orange;
+    text-align: center;
+}
+
+input[type=text]:focus,
+textarea:focus,
+button:focus {
+    box-shadow: 0 0 5px rgb(236, 137, 57);
+    /* padding: 3px 0px 3px 3px; */
+    /* margin: 5px 1px 3px 0px; */
+    border: 1px solid rgb(255, 188, 45);
 }
