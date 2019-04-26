@@ -5,7 +5,7 @@ const Result = props => {
 
     console.log(props.recipe.more);
     let content = null;
-    if (more===true) {
+    if (more === true && value) {
         content = (
             <div className="content">
                 <div className="food__container">
@@ -112,8 +112,11 @@ const Result = props => {
             </div>
         );
     }
-    return <div className="result">
-     {!more ? `Nie mamy w bazie ${value}` : content}
-    </div>;
+
+    return (
+        <div className="result">
+            {more === false ? `Nie mamy w bazie ${value}` : content}
+        </div>
+    );
 };
 export default Result;

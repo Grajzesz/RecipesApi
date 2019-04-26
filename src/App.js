@@ -7,7 +7,7 @@ const ApiKey = '67d51b152c762ab5dd5a32213b7fd4dd';
 class App extends Component {
     state = {
         err: '',
-        more:'',
+        more: '',
         value: '',
         images: '',
         labels: ''
@@ -20,15 +20,17 @@ class App extends Component {
     };
     handleCitySubmit = e => {
         e.preventDefault();
+        this.setState({
+            more: false
+        });
         console.log('lala');
         var counter = -1;
         function add() {
-            if(counter === 19){
-                counter=-1
+            if (counter === 19) {
+                counter = -1;
             }
             return (counter += 1);
         }
-
 
         let n = 20;
         const Api = `https://api.edamam.com/search?q=${
@@ -42,19 +44,16 @@ class App extends Component {
                 }
                 throw Error('lipa');
             })
-            .catch(
-                err => console.log(err),
-                this.setState(prevState => ({
-                    more: false,
-                    value: prevState.value
-                }))
-            )
+
             .then(response => response.json())
             .then(data => {
                 console.log(data.more);
+                if (!data.more) {
+                    return data;
+                }
                 this.setState(prevState => ({
                     err: false,
-                    more:true,
+                    more: data.more,
                     images: [
                         {
                             image0: data.hits[add()].recipe.image,
@@ -103,28 +102,50 @@ class App extends Component {
                             label19: data.hits[add()].recipe.label
                         }
                     ],
-ingredients:[{
-    ingredients0:data.hits[add()].recipe.ingredientLines,
-    ingredients1:data.hits[add()].recipe.ingredientLines,
-    ingredients2:data.hits[add()].recipe.ingredientLines,
-    ingredients3:data.hits[add()].recipe.ingredientLines,
-    ingredients4:data.hits[add()].recipe.ingredientLines,
-    ingredients5:data.hits[add()].recipe.ingredientLines,
-    ingredients6:data.hits[add()].recipe.ingredientLines,
-    ingredients7:data.hits[add()].recipe.ingredientLines,
-    ingredients8:data.hits[add()].recipe.ingredientLines,
-    ingredients9:data.hits[add()].recipe.ingredientLines,
-    ingredients10:data.hits[add()].recipe.ingredientLines,
-    ingredients11:data.hits[add()].recipe.ingredientLines,
-    ingredients12:data.hits[add()].recipe.ingredientLines,
-    ingredients13:data.hits[add()].recipe.ingredientLines,
-    ingredients14:data.hits[add()].recipe.ingredientLines,
-    ingredients15:data.hits[add()].recipe.ingredientLines,
-    ingredients16:data.hits[add()].recipe.ingredientLines,
-    ingredients17:data.hits[add()].recipe.ingredientLines,
-    ingredients18:data.hits[add()].recipe.ingredientLines,
-    ingredients19:data.hits[add()].recipe.ingredientLines,
-}]
+                    ingredients: [
+                        {
+                            ingredients0:
+                                data.hits[add()].recipe.ingredientLines,
+                            ingredients1:
+                                data.hits[add()].recipe.ingredientLines,
+                            ingredients2:
+                                data.hits[add()].recipe.ingredientLines,
+                            ingredients3:
+                                data.hits[add()].recipe.ingredientLines,
+                            ingredients4:
+                                data.hits[add()].recipe.ingredientLines,
+                            ingredients5:
+                                data.hits[add()].recipe.ingredientLines,
+                            ingredients6:
+                                data.hits[add()].recipe.ingredientLines,
+                            ingredients7:
+                                data.hits[add()].recipe.ingredientLines,
+                            ingredients8:
+                                data.hits[add()].recipe.ingredientLines,
+                            ingredients9:
+                                data.hits[add()].recipe.ingredientLines,
+                            ingredients10:
+                                data.hits[add()].recipe.ingredientLines,
+                            ingredients11:
+                                data.hits[add()].recipe.ingredientLines,
+                            ingredients12:
+                                data.hits[add()].recipe.ingredientLines,
+                            ingredients13:
+                                data.hits[add()].recipe.ingredientLines,
+                            ingredients14:
+                                data.hits[add()].recipe.ingredientLines,
+                            ingredients15:
+                                data.hits[add()].recipe.ingredientLines,
+                            ingredients16:
+                                data.hits[add()].recipe.ingredientLines,
+                            ingredients17:
+                                data.hits[add()].recipe.ingredientLines,
+                            ingredients18:
+                                data.hits[add()].recipe.ingredientLines,
+                            ingredients19:
+                                data.hits[add()].recipe.ingredientLines
+                        }
+                    ]
                     // image: prevState.image + 1 + data.hits[add()].recipe.image
                 }));
                 console.log(this.state.images);
@@ -136,8 +157,14 @@ ingredients:[{
                 //     images.push(data.hits[i].recipe.image);
                 //     console.log(images);
                 // }
-            });
-
+            })
+            .catch(
+                err => console.log(err),
+                this.setState(prevState => ({
+                    err: true,
+                    value: prevState.value
+                }))
+            );
     };
 
     render() {
