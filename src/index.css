@@ -99,7 +99,18 @@ button:focus {
     /* margin: 5px 1px 3px 0px; */
     border: 1px solid rgb(255, 188, 45);
 }
-.link{
+
+.link {
     height: 10%;
     width: 90%;
+}
+
+.buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding: 3% 0;
+}
+.prevButton, .nextButton{
+    width: 25%;
 }
