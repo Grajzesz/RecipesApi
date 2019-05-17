@@ -112,6 +112,8 @@ const Result = props => {
                     <h3>{labels[0].label19}</h3>
                     <p>{ingredients[0].ingredients19.join(', \r\n')}</p>
                 </div>
+                <button onClick={props.prevPage}>prev</button>
+                <button onClick={props.nextPage}>next</button>
             </div>
         );
     }

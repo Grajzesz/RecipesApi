@@ -9,7 +9,9 @@ class App extends Component {
         more: '',
         value: '',
         images: '',
-        labels: ''
+        labels: '',
+        from: 0,
+        to: 20
     };
 
     handleTextChange = e => {
@@ -17,11 +19,10 @@ class App extends Component {
             value: e.target.value
         });
     };
+
     handleCitySubmit = e => {
         e.preventDefault();
-        this.setState({
-            more: false
-        });
+
         console.log('lala');
         var counter = -1;
         function add() {
@@ -31,10 +32,14 @@ class App extends Component {
             return (counter += 1);
         }
 
-        let n = 20;
+        // let from = 0;
+        // let to = 20;
         const Api = `https://api.edamam.com/search?q=${
             this.state.value
-        }&app_id=f7495c5e&app_key=${ApiKey}&to=${n}`;
+        }&app_id=f7495c5e&app_key=${ApiKey}&from=${this.state.from}&to=${
+            this.state.to
+        }`;
+        // console.log(from);
 
         fetch(Api)
             .then(response => {
@@ -46,12 +51,13 @@ class App extends Component {
 
             .then(response => response.json())
             .then(data => {
-                console.log(data.more);
+                console.log(data);
                 if (!data.more) {
                     return data;
                 }
                 this.setState(prevState => ({
                     more: data.more,
+                    // from: this.state.from + 20, to: this.state.to + 20,
                     images: [
                         {
                             image0: data.hits[add()].recipe.image,
@@ -155,8 +161,51 @@ class App extends Component {
         //         value: prevState.value
         //     }))
         // );
+        // from += 20;
+        // to += 20;
+        // console.log(from);
+        // console.log(to);
     };
+    handleNextpage = e => {
+        e.persist();
+        this.setState(
+            { from: this.state.from + 20, to: this.state.to + 20 },
+            () => {
+                this.handleCitySubmit(e);
+                console.log('is', this.state.from);
+            }
+        );
+        // this.handleCitySubmit(e);
+        console.log('====================================');
+        console.log(this.state.from);
+        console.log(this.state.to);
+        console.log('====================================');
+        // this.handleCitySubmit = this.handleCitySubmit.bind(this);
+        // this.handleTextChange = this.handleTextChange.bind(this);
+        // this.handleTextChange(e);
 
+        console.log(this.data);
+    };
+    handlePreviouspage = e => {
+        e.persist();
+        this.setState(
+            { from: this.state.from - 20, to: this.state.to - 20 },
+            () => {
+                this.handleCitySubmit(e);
+                console.log('is', this.state.from);
+            }
+        );
+        // this.handleCitySubmit(e);
+        console.log('====================================');
+        console.log(this.state.from);
+        console.log(this.state.to);
+        console.log('====================================');
+        // this.handleCitySubmit = this.handleCitySubmit.bind(this);
+        // this.handleTextChange = this.handleTextChange.bind(this);
+        // this.handleTextChange(e);
+        this.handleCitySubmit(e);
+        console.log(this.data);
+    };
     render() {
         return (
             <div>
@@ -165,7 +214,11 @@ class App extends Component {
                     change={this.handleTextChange}
                     submit={this.handleCitySubmit}
                 />
-                <Result recipe={this.state} />
+                <Result
+                    recipe={this.state}
+                    nextPage={this.handleNextpage}
+                    prevPage={this.handlePreviouspage}
+                />
             </div>
         );
     }
